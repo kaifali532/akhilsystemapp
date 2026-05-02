@@ -12,10 +12,11 @@ interface AppState {
   queue: any[];
   
   // Actions
-  login: (email: string) => Promise<void>;
+  login: (email: string, password?: string) => Promise<void>;
+  signup: (email: string, password: string, role: string) => Promise<void>;
+  restoreSession: () => Promise<void>;
   logout: () => Promise<void>;
   fetchData: () => Promise<void>;
-  subscribeToChanges: () => void;
   
   bookAppointment: (patientId: string, doctorId: string, time: string) => Promise<void>;
   updateQueueStatus: (queueId: string, status: string) => Promise<void>;
@@ -31,20 +32,47 @@ export const useAppStore = create<AppState>((set, get) => ({
   appointments: [],
   queue: [],
 
-  subscribeToChanges: () => {
+  restoreSession: async () => {
     if (get().isDemoMode) return;
-    
-    supabase
-      .channel('schema-db-changes')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'queue' },
-        (payload) => {
-          // Whenever queue changes, just re-fetch gracefully
-          get().fetchData();
-        }
-      )
-      .subscribe();
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.user) {
+       const { data: userProfile } = await supabase.from('users').select('*').eq('id', session.user.id).single();
+       set({ user: session.user, role: userProfile?.role || 'receptionist' });
+       await get().fetchData();
+    }
+  },
+
+  signup: async (email, password, role) => {
+    if (get().isDemoMode) {
+      alert("Signup is disabled in demo mode.");
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (data?.user) {
+      // Insert into users table
+      const { error: dbError } = await supabase.from('users').insert({
+        id: data.user.id,
+        email: email,
+        role: role
+      });
+
+      if (dbError) {
+        console.error("Failed to insert user public profile:", dbError);
+        throw new Error("Account created but failed to set role. " + dbError.message);
+      }
+
+      set({ user: data.user, role: role });
+      await get().fetchData();
+    }
   },
 
   login: async (email: string, password?: string) => {
@@ -55,16 +83,16 @@ export const useAppStore = create<AppState>((set, get) => ({
       return;
     }
     
+    const pass = password || 'demo123';
+
     // Real Supabase login
     const { data, error } = await supabase.auth.signInWithPassword({
        email,
-       password: password || 'password123'
+       password: pass
     });
 
     if (error) {
-       console.error("Login failed:", error.message);
-       alert("Login failed: " + error.message);
-       return;
+       throw new Error(error.message);
     }
 
     if (data?.user) {
@@ -76,6 +104,9 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   logout: async () => {
+    if (!get().isDemoMode) {
+      await supabase.auth.signOut();
+    }
     set({ user: null, role: null });
   },
 
