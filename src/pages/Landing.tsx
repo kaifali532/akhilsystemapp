@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { NavLink } from 'react-router';
 import { ArrowRight, Activity, Clock, ShieldCheck, Users, Stethoscope, Check } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { Footer } from '../components/Footer';
 
 export default function Landing() {
   const containerVariants = {
@@ -180,18 +181,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-slate-200 dark:border-slate-800/50 mt-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Stethoscope className="w-5 h-5 text-blue-500" />
-            <span className="font-bold text-lg tracking-tight text-slate-800 dark:text-white">Akhil Systems</span>
-          </div>
-          <p className="text-slate-500 dark:text-slate-500 font-medium text-sm">
-            © {new Date().getFullYear()} Akhil Systems. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

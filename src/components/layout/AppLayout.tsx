@@ -4,6 +4,7 @@ import { LayoutDashboard, Users, Calendar, Activity, Stethoscope, LogOut, Moon, 
 import { useAppStore } from '../../store/useAppStore';
 import { Button } from '../ui/button';
 import { motion, AnimatePresence } from 'motion/react';
+import { Footer } from '../Footer';
 
 export function AppLayout({ children }: { children: ReactNode }) {
   const { user, role, logout, isDemoMode } = useAppStore();
@@ -120,19 +121,22 @@ export function AppLayout({ children }: { children: ReactNode }) {
             </div>
           </div>
         </header>
-        <div className="flex-1 overflow-auto p-6 md:p-8 space-y-8 z-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="h-full"
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
+        <div className="flex-1 overflow-auto z-10 flex flex-col custom-scrollbar">
+          <div className="flex-1 p-6 md:p-8 space-y-8 flex flex-col">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="flex-1 flex flex-col"
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <Footer />
         </div>
       </main>
     </div>
