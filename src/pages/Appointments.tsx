@@ -57,10 +57,10 @@ export default function Appointments() {
         </div>
         
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button className="w-full sm:w-auto">
+          <DialogTrigger render={<Button className="w-full sm:w-auto" />}>
+            <>
               <Plus className="w-4 h-4 mr-2" /> Book Appointment
-            </Button>
+            </>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] overflow-hidden rounded-[2rem] border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-black/90 backdrop-blur-xl">
             <DialogHeader className="p-6 border-b border-slate-100 dark:border-slate-800">

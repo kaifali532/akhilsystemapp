@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
 import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
+import { Input } from '../components/ui/Input';
 import { Search, Plus, FileText, User } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '../components/ui/dialog';
 import { Label } from '../components/ui/label';
@@ -54,10 +54,10 @@ export default function Patients() {
         </div>
         
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button className="w-full sm:w-auto">
+          <DialogTrigger render={<Button className="w-full sm:w-auto" />}>
+            <>
               <Plus className="w-4 h-4 mr-2" /> Add Patient
-            </Button>
+            </>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] overflow-hidden rounded-[2rem] border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-black/90 backdrop-blur-xl">
             <DialogHeader className="p-6 border-b border-slate-100 dark:border-slate-800">

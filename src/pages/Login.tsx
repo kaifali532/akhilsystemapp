@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router';
 import { useAppStore } from '../store/useAppStore';
 import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
+import { Input } from '../components/ui/Input';
 import { Label } from '../components/ui/label';
 import { DEMO_DATA } from '../lib/demo-data';
 import { motion, AnimatePresence } from 'motion/react';
