@@ -37,11 +37,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
       {/* Sidebar - Glassmorphism */}
       <aside className="w-64 bg-white/70 dark:bg-[#1C1C1E]/70 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300 z-10">
         <div className="p-6 border-b border-slate-100 dark:border-slate-800">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-[0_0_15px_rgba(66,133,244,0.4)]">
-              A
-            </div>
-            <span className="font-bold text-lg tracking-tight">Akhil Systems</span>
+          <div className="flex items-center gap-2 mb-2">
+            <img 
+              src="https://aghhis.in/images/login/akhil-logo.png" 
+              alt="Akhil Logo" 
+              className="h-10 lg:h-12 w-auto object-contain dark:bg-white/90 dark:p-1.5 dark:rounded-lg transition-all"
+            />
           </div>
           <p className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold tracking-wider uppercase">Smart OPD Optimizer</p>
         </div>

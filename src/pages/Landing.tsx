@@ -29,12 +29,12 @@ export default function Landing() {
       <header className="fixed top-0 w-full z-50 glass-header border-b border-transparent backdrop-blur-xl bg-white/60 dark:bg-black/40">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20">
-              <Stethoscope className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
-              Akhil Systems
-            </span>
+            <img 
+              src="https://aghhis.in/images/login/akhil-logo.png" 
+              alt="Akhil Logo" 
+              className="h-10 md:h-12 w-auto object-contain drop-shadow-sm dark:bg-white/90 dark:p-1.5 dark:rounded-lg"
+              loading="lazy"
+            />
           </div>
           <div className="flex gap-4">
             <NavLink to="/login">

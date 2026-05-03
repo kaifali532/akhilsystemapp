@@ -6,12 +6,20 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-black/40 backdrop-blur-xl shrink-0">
       <div className="w-full px-6 md:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5 focus:outline-none">
-          Created by 
-          <span className="font-bold text-slate-800 dark:text-slate-200 ml-1">Md Kaif</span>
-          <span className="mx-2 opacity-50 hidden sm:inline-block">•</span>
-          <span className="hidden sm:inline-block">© {currentYear}</span>
-        </p>
+        <div className="flex items-center gap-4">
+          <img 
+            src="https://aghhis.in/images/login/akhil-logo.png" 
+            alt="Akhil Logo" 
+            className="h-6 w-auto object-contain dark:bg-white/90 dark:p-1 dark:rounded transition-all"
+            loading="lazy"
+          />
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5 focus:outline-none border-l border-slate-300 dark:border-slate-700 pl-4">
+            Created by 
+            <span className="font-bold text-slate-800 dark:text-slate-200 ml-1">Md Kaif</span>
+            <span className="mx-2 opacity-50 hidden sm:inline-block">•</span>
+            <span className="hidden sm:inline-block">© {currentYear}</span>
+          </p>
+        </div>
         <div className="flex items-center gap-6">
           <a
             href="https://github.com/kaifali532"

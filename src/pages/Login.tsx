@@ -54,13 +54,13 @@ export default function Login() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="relative z-10">
-          <NavLink to="/" className="inline-flex items-center gap-3 text-white hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-500/20">
-              <Stethoscope className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-bold text-xl tracking-tight">
-              Akhil Systems
-            </span>
+          <NavLink to="/" className="inline-flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src="https://aghhis.in/images/login/akhil-logo.png" 
+              alt="Akhil Logo" 
+              className="h-12 sm:h-14 w-auto object-contain bg-white/90 p-2 rounded-xl shadow-lg"
+              loading="lazy"
+            />
           </NavLink>
         </div>
 
@@ -89,10 +89,13 @@ export default function Login() {
         
         {/* Mobile Header */}
         <div className="lg:hidden absolute top-6 left-6 z-20">
-          <NavLink to="/" className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-500/20">
-              <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-white" />
-            </div>
+          <NavLink to="/" className="inline-flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src="https://aghhis.in/images/login/akhil-logo.png" 
+              alt="Akhil Logo" 
+              className="h-10 w-auto object-contain bg-white/90 p-1.5 rounded-lg shadow-md"
+              loading="lazy"
+            />
           </NavLink>
         </div>
         
