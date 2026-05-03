@@ -21,6 +21,7 @@ interface AppState {
   bookAppointment: (patientId: string, doctorId: string, time: string) => Promise<void>;
   updateQueueStatus: (queueId: string, status: string) => Promise<void>;
   addPatient: (data: any) => Promise<void>;
+  deletePatient: (patientId: string) => Promise<void>;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -225,6 +226,16 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
 
     await supabase.from('patients').insert(data);
+    await get().fetchData();
+  },
+
+  deletePatient: async (patientId) => {
+    if (get().isDemoMode) {
+      set(state => ({ patients: state.patients.filter(p => p.id !== patientId) }));
+      return;
+    }
+
+    await supabase.from('patients').delete().eq('id', patientId);
     await get().fetchData();
   }
 }));

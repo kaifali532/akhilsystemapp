@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/Input';
-import { Search, Plus, FileText, User } from 'lucide-react';
+import { Search, Plus, FileText, User, Trash2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '../components/ui/dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../components/ui/alert-dialog';
 import { Label } from '../components/ui/label';
 import { motion } from 'motion/react';
 
@@ -21,7 +22,7 @@ const itemVariants = {
 };
 
 export default function Patients() {
-  const { patients, addPatient } = useAppStore();
+  const { patients, addPatient, deletePatient } = useAppStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [open, setOpen] = useState(false);
   
@@ -145,9 +146,32 @@ export default function Patients() {
                   </td>
                   <td className="px-6 py-4 font-medium text-slate-500">{patient.phone}</td>
                   <td className="px-6 py-4 text-right">
-                    <Button variant="ghost" size="sm" className="h-9 rounded-full text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                       <FileText className="w-4 h-4 mr-2" /> View History
-                    </Button>
+                    <div className="flex justify-end gap-2">
+                      <Button variant="ghost" size="sm" className="h-9 rounded-full text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                         <FileText className="w-4 h-4 mr-2" /> View History
+                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-9 w-9 p-0 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                             <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="rounded-[2rem] border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-black/95 backdrop-blur-xl">
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Patient Record</AlertDialogTitle>
+                            <AlertDialogDescription className="text-slate-500">
+                              This action cannot be undone. This will permanently delete the record for <strong className="text-slate-800 dark:text-slate-200">{patient.name}</strong>.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel className="rounded-xl border-slate-200 dark:border-slate-800">Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => deletePatient(patient.id)} className="rounded-xl bg-red-600 hover:bg-red-700 text-white border-0">
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
                   </td>
                 </tr>
               ))}
